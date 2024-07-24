@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,7 +24,7 @@ namespace AppMini
             Id=++_id;
             Name = name;
             Type = type;
-            Limit = (int)type;
+            Limit = type==ClassroomType.Backend?20:15;
             students = new List<Student>();
             
 
@@ -40,8 +41,9 @@ namespace AppMini
         public Student Find(int id) {
            return students.FirstOrDefault(p => p.Id == id);
         }
-        public void Remove(Student student)
+        public void Remove( int id)
         {
+            var student = Find(id);
             students.Remove(student);
         }
 
